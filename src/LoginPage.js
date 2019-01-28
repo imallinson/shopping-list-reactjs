@@ -16,7 +16,7 @@ class LoginPage extends Component {
         e.preventDefault();
         axios({
             method: 'put',
-            url: 'http://localhost:8081/meal-planner/rest/account/check',
+            url: 'http://localhost:8081/shopping-list/rest/account/check',
             responseType: 'json',
             data: {
                 username: this.state.username,
@@ -25,7 +25,7 @@ class LoginPage extends Component {
         })
         .then(function (response) {
             if (response.data.message === "logged in") {
-                actuallyThis.props.handleLogin(actuallyThis.state.username);
+                actuallyThis.props.loginHandler(actuallyThis.state.username);
             } else {
                 actuallyThis.setState({
                     error: response.data.message
@@ -42,7 +42,7 @@ class LoginPage extends Component {
         e.preventDefault();
         axios({
             method: 'post',
-            url: 'http://localhost:8081/meal-planner/rest/account/create',
+            url: 'http://localhost:8081/shopping-list/rest/account/create',
             responseType: 'json',
             data: {
                 username: this.state.username,
@@ -51,7 +51,7 @@ class LoginPage extends Component {
         })
         .then(function (response) {
             if (response.data.message === "account sucessfully created") {
-                actuallyThis.props.handleLogin(actuallyThis.state.username);
+                actuallyThis.props.loginHandler(actuallyThis.state.username);
             } else {
                 actuallyThis.setState({
                     error: response.data.message
