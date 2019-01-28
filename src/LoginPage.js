@@ -12,7 +12,7 @@ class LoginPage extends Component {
     }
 
     logIn = (e) => {
-        var actuallyThis = this;
+        let actuallyThis = this;
         e.preventDefault();
         axios({
             method: 'put',
@@ -38,7 +38,7 @@ class LoginPage extends Component {
     }
 
     createUser = (e) => {
-        var actuallyThis = this;
+        let actuallyThis = this;
         e.preventDefault();
         axios({
             method: 'post',
