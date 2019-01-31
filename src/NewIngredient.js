@@ -24,7 +24,26 @@ class Ingredient extends Component {
     }
 
     addIngredient = () => {
+        if (this.state.ingredientName === null) {
+            this.setState({
+                ingredientName: " "
+            })
+        }
+
+        if (this.state.amount === null || this.state.amount < 0 || this.state.amount === NaN) {
+            this.setState({
+                amount: 0
+            })
+        }
+
+        if (this.state.measurement === null) {
+            this.setState({
+                measurement: " "
+            })
+        }
+        
         let actuallyThis = this;
+
         axios({
             method: 'post',
             url: 'http://localhost:8081/shopping-list/rest/ingredient/add',

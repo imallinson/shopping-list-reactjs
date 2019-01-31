@@ -37,16 +37,17 @@ class ShoppingList extends Component {
     }
 
     clearList = () => {
-        let actuallyThis = this;
+        this.setState({
+            shoppingList: []
+        })
+
         axios({
             method: 'delete',
             url: "http://localhost:8081/shopping-list/rest/account/clear/" + this.props.username,
             responseType: 'json'
         })
         .then(function (response) {
-            actuallyThis.setState({
-                shoppingList: []
-            })
+
         })
         .catch(function (error) {
             console.log(error);
@@ -58,7 +59,10 @@ class ShoppingList extends Component {
     }
 
     render() {
-        const listComponents = this.state.shoppingList.map((i) => <div className="row" id={i} ><Ingredient ingredient={i} onUpdate={this.handleUpdate} username={this.props.username} /></div>);
+        const listComponents = this.state.shoppingList.map((i) => 
+            (<div className="row" id={i.ingredientID} >
+                <Ingredient ingredient={i} onUpdate={this.handleUpdate} username={this.props.username} />
+            </div>));
 
         return(
             <div className="container" id="listPage" >

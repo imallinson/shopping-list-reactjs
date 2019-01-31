@@ -1,30 +1,44 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import MaterialIcon, {colorPalette} from 'material-icons-react';
 
 class Ingredient extends Component {
     constructor() {
         super();
         this.state = {
-            checked: false,
             edited: false,
             ingredientName: null,
-            measurement: null,
             amount: null,
+            measurement: null
         }
     }
 
     componentWillReceiveProps = () => {
-        this.setState({
-            ingredientName: this.props.ingredient.ingredientName,
-            amount: this.props.ingredient.amount,
-            measurement: this.props.ingredient.measurement
-        })
-    }
+        let ingredientName;
+        let amount;
+        let measurement;
 
-    markChecked = () => {
+        if (this.props.ingredient.ingredientName) {
+            ingredientName = this.props.ingredient.ingredientName
+        } else {
+            ingredientName = " "
+        }
+
+        if (this.props.ingredient.amount) {
+            amount = this.props.ingredient.amount
+        } else {
+            amount = 0
+        }
+
+        if (this.props.ingredient.measurement) {
+            measurement = this.props.ingredient.measurement
+        } else {
+            measurement = " "
+        }
+
         this.setState({
-            checked: !this.state.checked
+            ingredientName: ingredientName,
+            amount: amount,
+            measurement: measurement
         })
     }
 
@@ -53,13 +67,10 @@ class Ingredient extends Component {
             }
         })
         .then(function () {
-            actuallyThis.props.onUpdate();
             actuallyThis.setState({
-                edited: false,
-                ingredientName: actuallyThis.state.ingredientName,
-                amount: actuallyThis.state.amount,
-                measurement: actuallyThis.state.measurement 
+                edited: false
             })
+            actuallyThis.props.onUpdate();
         })
         .catch(function (error) {
             console.log(error);
