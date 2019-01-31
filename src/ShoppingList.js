@@ -37,17 +37,16 @@ class ShoppingList extends Component {
     }
 
     clearList = () => {
-        this.setState({
-            shoppingList: []
-        })
-
+        let actuallyThis = this;
         axios({
             method: 'delete',
             url: "http://localhost:8081/shopping-list/rest/account/clear/" + this.props.username,
             responseType: 'json'
         })
         .then(function (response) {
-
+            actuallyThis.setState({
+                shoppingList: []
+            })
         })
         .catch(function (error) {
             console.log(error);
