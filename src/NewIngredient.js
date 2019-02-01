@@ -81,7 +81,7 @@ class Ingredient extends Component {
                 <div className="input-field col s2">
                     <input placeholder="measurement" type="text" name="measurement" value={this.state.measurement} onChange={this.handleChange} ></input>
                 </div>
-                <div className="col s1">
+                <div className="col s1 right">
                     {this.state.edited ?
                         <button className="btn grey darken-2 list-button" onClick={this.addIngredient} >Save</button> :
                         null }

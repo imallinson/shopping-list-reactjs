@@ -8,20 +8,20 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            username: null
+            username: sessionStorage.getItem("username")
         }
     }
 
-    setUsername = (username) => {
+    handleLogin = () => {
         this.setState({
-            username: username
+            username: sessionStorage.getItem("username")
         })
     }
 
     render() {
         return (
             <div className="app">
-                {this.state.username === null ? <LoginPage loginHandler={this.setUsername} /> : <ShoppingList username={this.state.username} /> }
+                {this.state.username === null ? <LoginPage loginHandler={this.handleLogin} /> : <ShoppingList username={this.state.username} loginHandler={this.handleLogin} /> }
             </div>
         );
     }

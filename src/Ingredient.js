@@ -104,7 +104,7 @@ class Ingredient extends Component {
                 <div className="input-field col s2">
                     <input defaultValue={this.props.ingredient.measurement} type="text" name="measurement" onChange={this.handleChange} ></input>
                 </div>
-                <div className="col s1">
+                <div className="col s1 right">
                     {this.state.edited ?
                         <button className="btn grey darken-2 list-button" onClick={this.saveChange} >Save</button> :
                         <button className="btn grey darken-2 list-button" onClick={this.deleteItem} >Delete</button> }
