@@ -13,13 +13,9 @@ class Ingredient extends Component {
     }
 
     handleChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
         this.setState({
-            edited: true,
-            [name]: value
+            [e.target.name]: e.target.value,
+            edited: true
         })
     }
 
