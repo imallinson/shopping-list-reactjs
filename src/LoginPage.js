@@ -31,7 +31,6 @@ class LoginPage extends Component {
                     bcrypt.compare(actuallyThis.state.password, response.data.password, function (err, res) {
                         if (res === true) {
                             sessionStorage.setItem("username", actuallyThis.state.username);
-                            actuallyThis.props.loginHandler();
                         } else {
                             actuallyThis.setState({
                                 error: "incorrect password"

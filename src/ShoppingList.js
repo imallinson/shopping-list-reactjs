@@ -23,7 +23,7 @@ class ShoppingList extends Component {
         let actuallyThis = this;
         axios({
             method: 'get',
-            url: "http://localhost:8081/shopping-list/rest/ingredient/get/" + this.props.username,
+            url: "http://localhost:8081/shopping-list/rest/ingredient/get/" + sessionStorage.getItem("username"),
             responseType: 'json'
         })
         .then(function (response) {
@@ -40,7 +40,7 @@ class ShoppingList extends Component {
         let actuallyThis = this;
         axios({
             method: 'delete',
-            url: "http://localhost:8081/shopping-list/rest/account/clear/" + this.props.username,
+            url: "http://localhost:8081/shopping-list/rest/account/clear/" + sessionStorage.getItem("username"),
             responseType: 'json'
         })
         .then(function (response) {
@@ -59,13 +59,12 @@ class ShoppingList extends Component {
 
     logOut = () => {
         sessionStorage.clear();
-        this.props.loginHandler();
     }
 
     render() {
         const listComponents = this.state.shoppingList.map((i) => 
             (<div className="row" id={i.ingredientID} >
-                <Ingredient ingredient={i} onUpdate={this.handleUpdate} username={this.props.username} />
+                <Ingredient ingredient={i} onUpdate={this.handleUpdate} />
             </div>));
 
         return(
@@ -79,7 +78,7 @@ class ShoppingList extends Component {
                     </div>
                 </div>
                 {listComponents}
-                <NewIngredient onUpdate={this.handleUpdate} username={this.props.username} />
+                <NewIngredient onUpdate={this.handleUpdate} />
             </div>
         );       
     }

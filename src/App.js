@@ -5,23 +5,10 @@ import LoginPage from './LoginPage.js';
 import ShoppingList from './ShoppingList.js';
 
 class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            username: sessionStorage.getItem("username")
-        }
-    }
-
-    handleLogin = () => {
-        this.setState({
-            username: sessionStorage.getItem("username")
-        })
-    }
-
     render() {
         return (
             <div className="app">
-                {this.state.username === null ? <LoginPage loginHandler={this.handleLogin} /> : <ShoppingList username={this.state.username} loginHandler={this.handleLogin} /> }
+                {sessionStorage.getItem("username") === null ? <LoginPage /> : <ShoppingList /> }
             </div>
         );
     }

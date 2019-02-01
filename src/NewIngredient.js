@@ -30,7 +30,7 @@ class Ingredient extends Component {
             })
         }
 
-        if (this.state.amount === null || this.state.amount < 0 || this.state.amount === NaN) {
+        if (this.state.amount === null || this.state.amount < 0 || isNaN(this.state.amount)) {
             this.setState({
                 amount: 0
             })
@@ -49,10 +49,10 @@ class Ingredient extends Component {
             url: 'http://localhost:8081/shopping-list/rest/ingredient/add',
             responseType: 'json',
             data: {
-                username: this.props.username,
-                ingredientName: this.state.ingredientName,
-                amount: this.state.amount,
-                measurement: this.state.measurement
+                username: sessionStorage.getItem("username"),
+                ingredientName: actuallyThis.state.ingredientName,
+                amount: actuallyThis.state.amount,
+                measurement: actuallyThis.state.measurement
             }
         })
         .then(function () {
