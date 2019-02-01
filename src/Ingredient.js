@@ -23,7 +23,7 @@ class Ingredient extends Component {
     saveChange = () => {
         let actuallyThis = this;
 
-        let amount = this.state.amount;
+        let amount = actuallyThis.state.amount;
         if (isNaN(amount)) {
             amount = 0;
         }
@@ -33,10 +33,10 @@ class Ingredient extends Component {
             url: "http://localhost:8081/shopping-list/rest/ingredient/update/" + this.props.ingredient.ingredientID,
             responseType: 'json',
             data: {
-                username: sessionStorage.getItem("username"),
-                ingredientName: this.state.ingredientName,
+                username: actuallyThis.props.username,
+                ingredientName: actuallyThis.state.ingredientName,
                 amount: amount,
-                measurement: this.state.measurement
+                measurement: actuallyThis.state.measurement
             }
         })
         .then(function () {

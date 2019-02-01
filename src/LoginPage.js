@@ -16,13 +16,13 @@ class LoginPage extends Component {
         e.preventDefault();
         let actuallyThis = this;
 
-
         axios({
             method: 'get',
             url: "http://localhost:8081/shopping-list/rest/account/check/" + actuallyThis.state.username,
             responseType: 'json'
         })
             .then(function (response) {
+                console.log(response);
                 if (response.data === null) {
                     actuallyThis.setState({
                         error: "username does not exist"
@@ -31,6 +31,7 @@ class LoginPage extends Component {
                     bcrypt.compare(actuallyThis.state.password, response.data.password, function (err, res) {
                         if (res === true) {
                             sessionStorage.setItem("username", actuallyThis.state.username);
+                            actuallyThis.props.loginHandler();
                         } else {
                             actuallyThis.setState({
                                 error: "incorrect password"
@@ -62,6 +63,7 @@ class LoginPage extends Component {
                     .then(function (response) {
                         if (response.data.message === "account sucessfully created") {
                             sessionStorage.setItem("username", actuallyThis.state.username);
+                            actuallyThis.props.loginHandler();
                         } else {
                             actuallyThis.setState({
                                 error: response.data.message

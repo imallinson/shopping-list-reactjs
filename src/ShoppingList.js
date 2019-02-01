@@ -64,7 +64,7 @@ class ShoppingList extends Component {
     render() {
         const listComponents = this.state.shoppingList.map((i) => 
             (<div className="row" id={i.ingredientID} >
-                <Ingredient ingredient={i} onUpdate={this.handleUpdate} />
+                <Ingredient ingredient={i} onUpdate={this.handleUpdate} username={this.props.username} />
             </div>));
 
         return(
@@ -78,7 +78,7 @@ class ShoppingList extends Component {
                     </div>
                 </div>
                 {listComponents}
-                <NewIngredient onUpdate={this.handleUpdate} />
+                <NewIngredient onUpdate={this.handleUpdate} username={this.props.username} />
             </div>
         );       
     }
