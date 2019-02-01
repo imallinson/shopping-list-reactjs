@@ -12,69 +12,26 @@ class Ingredient extends Component {
         }
     }
 
-    componentWillReceiveProps = () => {
-        let ingredientName;
-        let amount;
-        let measurement;
-
-        if (this.props.ingredient.ingredientName) {
-            ingredientName = this.props.ingredient.ingredientName
-        } else {
-            ingredientName = " "
-        }
-
-        if (this.props.ingredient.amount) {
-            amount = this.props.ingredient.amount
-        } else {
-            amount = 0
-        }
-
-        if (this.props.ingredient.measurement) {
-            measurement = this.props.ingredient.measurement
-        } else {
-            measurement = " "
-        }
-
+    componentWillMount = () => {
         this.setState({
-            ingredientName: ingredientName,
-            amount: amount,
-            measurement: measurement
+            ingredientName: this.props.ingredient.ingredientName,
+            amount: this.props.ingredient.amount,
+            measurement: this.props.ingredient.measurement
         })
     }
 
     saveChange = () => {
         let actuallyThis = this;
-        let ingredientName;
-        let amount;
-        let measurement;
-
-        if (this.state.ingredientName === null) {
-            ingredientName = this.props.ingredient.ingredientName
-        } else {
-            ingredientName = this.state.ingredientName
-        }
-
-        if (this.state.amount === null) {
-            amount = this.props.ingredient.amount
-        } else {
-            amount = this.state.amount
-        }
-
-        if (this.state.measurement === null) {
-            measurement = this.props.ingredient.measurement
-        } else {
-            measurement = this.state.measurement
-        }
-
+        
         axios({
             method: 'put',
             url: "http://localhost:8081/shopping-list/rest/ingredient/update/" + this.props.ingredient.ingredientID,
             responseType: 'json',
             data: {
                 username: sessionStorage.getItem("username"),
-                ingredientName: ingredientName,
-                amount: amount,
-                measurement: measurement
+                ingredientName: this.state.ingredientName,
+                amount: this.state.amount,
+                measurement: this.state.measurement
             }
         })
         .then(function () {
@@ -103,21 +60,10 @@ class Ingredient extends Component {
         })
     }
 
-    handleNameChange = (e) => {
+    handleChange = (e) => {
         this.setState({
-            ingredientName: e.target.value
-        })
-    }
-
-    handleAmountChange = (e) => {
-        this.setState({
-            amount: e.target.value
-        })
-    }
-
-    handleMeasurementChange = (e) => {
-        this.setState({
-            measurement: e.target.value
+            [e.target.name]: e.target.value,
+            edited: true
         })
     }
 
@@ -125,13 +71,13 @@ class Ingredient extends Component {
         return (
             <div className="row">
                 <div className="input-field col s7">
-                    <input defaultValue={this.state.ingredientName} type="text" name="ingredientName" onChange={this.handleNameChange} ></input>
+                    <input value={this.state.ingredientName} type="text" name="ingredientName" onChange={this.handleChange} ></input>
                 </div>
                 <div className="input-field col s2">
-                    <input defaultValue={this.state.amount} type="text" name="amount" onChange={this.handleAmountChange} ></input>
+                    <input value={this.state.amount} type="text" name="amount" onChange={this.handleChange} ></input>
                 </div>
                 <div className="input-field col s2">
-                    <input defaultValue={this.state.measurement} type="text" name="measurement" onChange={this.handleMeasurementChange} ></input>
+                    <input value={this.state.measurement} type="text" name="measurement" onChange={this.handleChange} ></input>
                 </div>
                 <div className="col s1 right">
                     {this.state.edited ?

@@ -75,16 +75,10 @@ class LoginPage extends Component {
         });
     }
 
-    handleUsernameChange = (e) => {
+    handleChange = (e) => {
         this.setState({
-            username: e.target.value
+            [e.target.name]: e.target.value
         })
-    }
-
-    handlePasswordChange = (e) => {
-        this.setState({
-            password: e.target.value
-        });
     }
 
     render() {
@@ -94,7 +88,7 @@ class LoginPage extends Component {
                     <div className="col s4"></div>
                     <div className="col s4">
                         <label htmlFor="username">Username</label>
-                        <input type="text" id="username" onChange={this.handleUsernameChange}></input>
+                        <input type="text" id="username" onChange={this.handleChange}></input>
                     </div>
                     <div className="col s4"></div>
                 </div>
@@ -102,7 +96,7 @@ class LoginPage extends Component {
                     <div className="col s4"></div>
                     <div className="col s4">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" onChange={this.handlePasswordChange}></input>
+                        <input type="password" id="password" onChange={this.handleChange}></input>
                         <label className="helper-text">{this.state.error}</label>
                     </div>
                     <div className="col s4"></div>
