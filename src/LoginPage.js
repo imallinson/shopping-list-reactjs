@@ -30,7 +30,8 @@ class LoginPage extends Component {
                 } else {
                     bcrypt.compare(actuallyThis.state.password, response.data.password, function (err, res) {
                         if (res === true) {
-                            actuallyThis.props.loginHandler(actuallyThis.state.username);
+                            sessionStorage.setItem("username", actuallyThis.state.username);
+                            actuallyThis.props.loginHandler();
                         } else {
                             actuallyThis.setState({
                                 error: "incorrect password"
@@ -61,7 +62,7 @@ class LoginPage extends Component {
                 })
                     .then(function (response) {
                         if (response.data.message === "account sucessfully created") {
-                            actuallyThis.props.loginHandler(actuallyThis.state.username);
+                            sessionStorage.setItem("username", actuallyThis.state.username);
                         } else {
                             actuallyThis.setState({
                                 error: response.data.message
