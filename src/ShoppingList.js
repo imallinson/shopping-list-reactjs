@@ -54,7 +54,7 @@ class ShoppingList extends Component {
     }
 
     handleUpdate = () => {
-        this.forceUpdate();
+        this.getIngredientList();
     }
 
     logOut = () => {
