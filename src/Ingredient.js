@@ -22,6 +22,11 @@ class Ingredient extends Component {
 
     saveChange = () => {
         let actuallyThis = this;
+
+        let amount = this.state.amount;
+        if (isNaN(amount)) {
+            amount = 0;
+        }
         
         axios({
             method: 'put',
@@ -30,7 +35,7 @@ class Ingredient extends Component {
             data: {
                 username: sessionStorage.getItem("username"),
                 ingredientName: this.state.ingredientName,
-                amount: this.state.amount,
+                amount: amount,
                 measurement: this.state.measurement
             }
         })
