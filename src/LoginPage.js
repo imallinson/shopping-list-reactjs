@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import bcrypt from 'bcryptjs';
 
 class LoginPage extends Component {
     constructor() {
@@ -12,55 +13,66 @@ class LoginPage extends Component {
     }
 
     logIn = (e) => {
-        let actuallyThis = this;
         e.preventDefault();
+        let actuallyThis = this;
+
+
         axios({
-            method: 'put',
-            url: "http://localhost:8081/shopping-list/rest/account/check",
-            responseType: 'json',
-            data: {
-                username: this.state.username,
-                password: this.state.password
-            }
+            method: 'get',
+            url: "http://localhost:8081/shopping-list/rest/account/check/" + actuallyThis.state.username,
+            responseType: 'json'
         })
-        .then(function (response) {
-            if (response.data.message === "logged in") {
-                actuallyThis.props.loginHandler(actuallyThis.state.username);
-            } else {
-                actuallyThis.setState({
-                    error: response.data.message
-                });
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+            .then(function (response) {
+                if (response.data === null) {
+                    actuallyThis.setState({
+                        error: "username does not exist"
+                    })
+                } else {
+                    bcrypt.compare(actuallyThis.state.password, response.data.password, function (err, res) {
+                        if (res === true) {
+                            actuallyThis.props.loginHandler(actuallyThis.state.username);
+                        } else {
+                            actuallyThis.setState({
+                                error: "incorrect password"
+                            })
+                        }
+                    });
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
 
     createUser = (e) => {
-        let actuallyThis = this;
         e.preventDefault();
-        axios({
-            method: 'post',
-            url: "http://localhost:8081/shopping-list/rest/account/create",
-            responseType: 'json',
-            data: {
-                username: this.state.username,
-                password: this.state.password
-            }
-        })
-        .then(function (response) {
-            if (response.data.message === "account sucessfully created") {
-                actuallyThis.props.loginHandler(actuallyThis.state.username);
-            } else {
-                actuallyThis.setState({
-                    error: response.data.message
-                });
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+        let actuallyThis = this;
+
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(actuallyThis.state.password, salt, function (err, hash) {
+                axios({
+                    method: 'post',
+                    url: "http://localhost:8081/shopping-list/rest/account/create",
+                    responseType: 'json',
+                    data: {
+                        username: actuallyThis.state.username,
+                        password: hash
+                    }
+                })
+                    .then(function (response) {
+                        if (response.data.message === "account sucessfully created") {
+                            actuallyThis.props.loginHandler(actuallyThis.state.username);
+                        } else {
+                            actuallyThis.setState({
+                                error: response.data.message
+                            });
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            });
+        });
     }
 
     handleUsernameChange = (e) => {
@@ -72,7 +84,7 @@ class LoginPage extends Component {
     handlePasswordChange = (e) => {
         this.setState({
             password: e.target.value
-        })
+        });
     }
 
     render() {
@@ -82,7 +94,7 @@ class LoginPage extends Component {
                     <div className="col s4"></div>
                     <div className="col s4">
                         <label htmlFor="username">Username</label>
-                        <input type="text" value={this.state.username} id="username" onChange={this.handleUsernameChange}></input>
+                        <input type="text" id="username" onChange={this.handleUsernameChange}></input>
                     </div>
                     <div className="col s4"></div>
                 </div>
@@ -90,7 +102,7 @@ class LoginPage extends Component {
                     <div className="col s4"></div>
                     <div className="col s4">
                         <label htmlFor="password">Password</label>
-                        <input type="password" value={this.state.password} id="password" onChange={this.handlePasswordChange}></input>
+                        <input type="password" id="password" onChange={this.handlePasswordChange}></input>
                         <label className="helper-text">{this.state.error}</label>
                     </div>
                     <div className="col s4"></div>
