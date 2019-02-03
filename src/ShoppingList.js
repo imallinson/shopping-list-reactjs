@@ -59,6 +59,7 @@ class ShoppingList extends Component {
 
     logOut = () => {
         sessionStorage.clear();
+        this.props.loginHandler();
     }
 
     render() {
