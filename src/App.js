@@ -21,7 +21,7 @@ class App extends Component {
     render() {
         return (
             <div className="app">
-                 {this.state.username === null ? <LoginPage loginHandler={this.handleLogin} /> : <ShoppingList username={this.state.username} loginHandler={this.handleLogin} /> }
+                 {this.state.username === null ? <LoginPage loginHandler={this.handleLogin} /> : <ShoppingList loginHandler={this.handleLogin} /> }
             </div>
         );
     }

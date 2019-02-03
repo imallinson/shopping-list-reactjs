@@ -37,7 +37,7 @@ class Ingredient extends Component {
                 measurement: " "
             })
         }
-        
+
         let actuallyThis = this;
 
         axios({
@@ -45,24 +45,24 @@ class Ingredient extends Component {
             url: 'http://localhost:8080/shopping-list/rest/ingredient/add',
             responseType: 'json',
             data: {
-                username: actuallyThis.props.username,
+                username: sessionStorage.getItem("username"),
                 ingredientName: actuallyThis.state.ingredientName,
                 amount: actuallyThis.state.amount,
                 measurement: actuallyThis.state.measurement
             }
         })
-        .then(function () {
-            actuallyThis.props.onUpdate();
-            actuallyThis.setState({
-                edited: false,
-                ingredientName: "",
-                amount: "",
-                measurement: "" 
+            .then(function () {
+                actuallyThis.props.onUpdate();
+                actuallyThis.setState({
+                    edited: false,
+                    ingredientName: " ",
+                    amount: 0,
+                    measurement: " "
+                })
             })
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
 
     render() {
@@ -80,7 +80,7 @@ class Ingredient extends Component {
                 <div className="col s1 right">
                     {this.state.edited ?
                         <button className="btn grey darken-2 list-button" onClick={this.addIngredient} >Save</button> :
-                        null }
+                        null}
                 </div>
             </div>
         );

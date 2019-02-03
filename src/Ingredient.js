@@ -33,7 +33,7 @@ class Ingredient extends Component {
             url: "http://localhost:8080/shopping-list/rest/ingredient/update/" + this.props.ingredient.ingredientID,
             responseType: 'json',
             data: {
-                username: actuallyThis.props.username,
+                username: sessionStorage.getItem("username"),
                 ingredientName: actuallyThis.state.ingredientName,
                 amount: amount,
                 measurement: actuallyThis.state.measurement
