@@ -19,6 +19,10 @@ class ShoppingList extends Component {
         this.getIngredientList();
     }
 
+    handleUpdate = () => {
+        this.getIngredientList();
+    }
+
     getIngredientList = () => {
         let actuallyThis = this;
         axios({
@@ -51,10 +55,6 @@ class ShoppingList extends Component {
             .catch(function (error) {
                 console.log(error);
             })
-    }
-
-    handleUpdate = () => {
-        this.getIngredientList();
     }
 
     logOut = () => {
