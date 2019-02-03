@@ -24,7 +24,7 @@ class Ingredient extends Component {
         let actuallyThis = this;
 
         let amount = actuallyThis.state.amount;
-        if (isNaN(amount)) {
+        if (isNaN(amount) || amount < 0) {
             amount = 0;
         }
         
