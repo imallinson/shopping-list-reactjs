@@ -12,7 +12,7 @@ class Ingredient extends Component {
         }
     }
 
-    handleChange = (event) => {
+    handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value,
             edited: true
@@ -42,7 +42,7 @@ class Ingredient extends Component {
 
         axios({
             method: 'post',
-            url: 'http://localhost:8081/shopping-list/rest/ingredient/add',
+            url: 'http://localhost:8080/shopping-list/rest/ingredient/add',
             responseType: 'json',
             data: {
                 username: actuallyThis.props.username,

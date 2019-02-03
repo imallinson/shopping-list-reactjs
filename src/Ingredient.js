@@ -30,7 +30,7 @@ class Ingredient extends Component {
         
         axios({
             method: 'put',
-            url: "http://localhost:8081/shopping-list/rest/ingredient/update/" + this.props.ingredient.ingredientID,
+            url: "http://localhost:8080/shopping-list/rest/ingredient/update/" + this.props.ingredient.ingredientID,
             responseType: 'json',
             data: {
                 username: actuallyThis.props.username,
@@ -54,7 +54,7 @@ class Ingredient extends Component {
         let actuallyThis = this;
         axios({
             method: 'delete',
-            url: "http://localhost:8081/shopping-list/rest/ingredient/remove/" + this.props.ingredient.ingredientID,
+            url: "http://localhost:8080/shopping-list/rest/ingredient/remove/" + this.props.ingredient.ingredientID,
             responseType: 'json'
         })
         .then(function () {

@@ -23,7 +23,7 @@ class ShoppingList extends Component {
         let actuallyThis = this;
         axios({
             method: 'get',
-            url: "http://localhost:8081/shopping-list/rest/ingredient/get/" + sessionStorage.getItem("username"),
+            url: "http://localhost:8080/shopping-list/rest/ingredient/get/" + sessionStorage.getItem("username"),
             responseType: 'json'
         })
         .then(function (response) {
@@ -40,7 +40,7 @@ class ShoppingList extends Component {
         let actuallyThis = this;
         axios({
             method: 'delete',
-            url: "http://localhost:8081/shopping-list/rest/account/clear/" + sessionStorage.getItem("username"),
+            url: "http://localhost:8080/shopping-list/rest/account/clear/" + sessionStorage.getItem("username"),
             responseType: 'json'
         })
         .then(function (response) {
@@ -69,6 +69,7 @@ class ShoppingList extends Component {
 
         return(
             <div className="container" id="listPage" >
+                <br/>
                 <div className="row">
                     <div className="col s4 offset-s4 center">
                         <button className="btn grey darken-2" onClick={this.clearList} >Clear Shopping List</button>
