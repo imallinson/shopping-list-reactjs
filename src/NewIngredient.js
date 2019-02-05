@@ -52,13 +52,13 @@ class Ingredient extends Component {
             }
         })
             .then(function () {
-                actuallyThis.props.onUpdate();
                 actuallyThis.setState({
                     edited: false,
-                    ingredientName: " ",
-                    amount: 0,
-                    measurement: " "
-                })
+                    ingredientName: null,
+                    amount: null,
+                    measurement: null
+                });
+                actuallyThis.props.onUpdate();
             })
             .catch(function (error) {
                 console.log(error);
