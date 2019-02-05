@@ -18,7 +18,7 @@ class LoginPage extends Component {
 
         axios({
             method: 'get',
-            url: "http://0.0.0.0:8080/shopping-list/rest/account/check/" + actuallyThis.state.username,
+            url: "http://35.246.105.207:8080/shopping-list/rest/account/check/" + actuallyThis.state.username,
             responseType: 'json'
         })
             .then(function (response) {
@@ -60,7 +60,7 @@ class LoginPage extends Component {
                     .then(function (hash) {
                         axios({
                             method: 'post',
-                            url: "http://0.0.0.0:8080/shopping-list/rest/account/create",
+                            url: "http://35.246.105.207:8080/shopping-list/rest/account/create",
                             responseType: 'json',
                             data: {
                                 username: actuallyThis.state.username,
