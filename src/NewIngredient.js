@@ -56,7 +56,7 @@ class Ingredient extends Component {
                 actuallyThis.setState({
                     edited: false,
                     ingredientName: " ",
-                    amount: 0,
+                    amount: null,
                     measurement: " "
                 })
             })
