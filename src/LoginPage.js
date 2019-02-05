@@ -60,7 +60,7 @@ class LoginPage extends Component {
                     .then(function (hash) {
                         axios({
                             method: 'post',
-                            url: "/shopping-list/rest/account/create",
+                            url: "http://172.20.0.3/shopping-list/rest/account/create",
                             responseType: 'json',
                             data: {
                                 username: actuallyThis.state.username,
