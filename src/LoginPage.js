@@ -18,7 +18,7 @@ class LoginPage extends Component {
 
         axios({
             method: 'get',
-            url: "/back-end/shopping-list/rest/account/check/" + actuallyThis.state.username,
+            url: "/shopping-list/rest/account/check/" + actuallyThis.state.username,
             responseType: 'json'
         })
             .then(function (response) {
@@ -60,7 +60,7 @@ class LoginPage extends Component {
                     .then(function (hash) {
                         axios({
                             method: 'post',
-                            url: "/back-end/shopping-list/rest/account/create",
+                            url: "/shopping-list/rest/account/create",
                             responseType: 'json',
                             data: {
                                 username: actuallyThis.state.username,
