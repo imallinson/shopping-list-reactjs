@@ -104,7 +104,7 @@ class LoginPage extends Component {
                     <div className="col s4"></div>
                     <div className="col s4">
                         <label htmlFor="username">Username</label>
-                        <input type="validate" name="username" required pattern="[A-Za-z0-9-]+" onChange={this.handleChange}></input>
+                        <input type="text" className="validate" name="username" required pattern="[A-Za-z0-9-]+" onChange={this.handleChange}></input>
                         <label className="helper-text"></label>
                     </div>
                     <div className="col s4"></div>
@@ -113,7 +113,7 @@ class LoginPage extends Component {
                     <div className="col s4"></div>
                     <div className="col s4">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" onChange={this.handleChange}></input>
+                        <input type="password" className="validate" name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" onChange={this.handleChange}></input>
                         <label className="helper-text"></label>
                     </div>
                     <div className="col s4"></div>

@@ -51,13 +51,13 @@ class Ingredient extends Component {
         return (
             <div className="row">
                 <div className="input-field col s7">
-                    <input placeholder="ingredient" type="validate" name="ingredientName" required value={this.state.ingredientName} onChange={this.handleChange} ></input>
+                    <input placeholder="ingredient" type="text" className="validate" name="ingredientName" required value={this.state.ingredientName} onChange={this.handleChange} ></input>
                 </div>
                 <div className="input-field col s2">
-                    <input placeholder="amount" type="validate" name="amount" required pattern="[0-9]+" value={this.state.amount} onChange={this.handleChange} ></input>
+                    <input placeholder="amount" type="text" className="validate" name="amount" required pattern="[0-9]+" value={this.state.amount} onChange={this.handleChange} ></input>
                 </div>
                 <div className="input-field col s2">
-                    <input placeholder="measurement" type="validate" name="measurement" value={this.state.measurement} onChange={this.handleChange} ></input>
+                    <input placeholder="measurement" type="text" className="validate" name="measurement" value={this.state.measurement} onChange={this.handleChange} ></input>
                 </div>
                 <div className="col s1 right">
                     {this.state.edited ?
