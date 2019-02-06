@@ -68,7 +68,6 @@ class LoginPage extends Component {
                             }
                         })
                             .then(function (response) {
-                                console.log(response);
                                 if (response.data.message === "account sucessfully created") {
                                     sessionStorage.setItem("username", actuallyThis.state.username);
                                     actuallyThis.props.loginHandler();
