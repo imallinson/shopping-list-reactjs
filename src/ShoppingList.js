@@ -26,10 +26,10 @@ class ShoppingList extends Component {
     getIngredientList = () => {
         let actuallyThis = this;
         axios.defaults.port = 8080;
-        
+
         axios({
             method: 'get',
-            url: "/shopping-list/rest/ingredient/get/" + sessionStorage.getItem("username"),
+            url: "http://35.189.92.93/shopping-list/rest/ingredient/get/" + sessionStorage.getItem("username"),
             responseType: 'json'
         })
             .then(function (response) {
@@ -48,7 +48,7 @@ class ShoppingList extends Component {
 
         axios({
             method: 'delete',
-            url: "/shopping-list/rest/account/clear/" + sessionStorage.getItem("username"),
+            url: "http://35.189.92.93/shopping-list/rest/account/clear/" + sessionStorage.getItem("username"),
             responseType: 'json'
         })
             .then(function (response) {
