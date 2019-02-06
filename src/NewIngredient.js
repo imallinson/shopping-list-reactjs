@@ -43,7 +43,7 @@ class Ingredient extends Component {
 
         axios({
             method: 'post',
-            url: "http://35.189.92.93/shopping-list/rest/ingredient/add",
+            url: "http://35.189.92.93:8080/shopping-list/rest/ingredient/add",
             responseType: 'json',
             data: {
                 username: sessionStorage.getItem("username"),
