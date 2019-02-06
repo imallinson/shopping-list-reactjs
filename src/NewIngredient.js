@@ -39,7 +39,6 @@ class Ingredient extends Component {
         }
 
         let actuallyThis = this;
-        axios.defaults.port = 8080;
 
         axios({
             method: 'post',
@@ -53,13 +52,13 @@ class Ingredient extends Component {
             }
         })
             .then(function () {
+                actuallyThis.props.onUpdate();
                 actuallyThis.setState({
                     edited: false,
                     ingredientName: null,
                     amount: null,
                     measurement: null
                 });
-                actuallyThis.props.onUpdate();
             })
             .catch(function (error) {
                 console.log(error);

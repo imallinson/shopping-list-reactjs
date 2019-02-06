@@ -55,7 +55,6 @@ class LoginPage extends Component {
 
         let actuallyThis = this;
         const saltRounds = 10;
-        axios.defaults.port = 8080;
 
         bcrypt.genSalt(saltRounds)
             .then(function (salt) {

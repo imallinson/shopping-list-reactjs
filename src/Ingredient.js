@@ -22,7 +22,6 @@ class Ingredient extends Component {
 
     saveChange = () => {
         let actuallyThis = this;
-        axios.defaults.port = 8080;
 
         let amount = actuallyThis.state.amount;
         if (isNaN(amount) || amount < 0) {
@@ -41,10 +40,10 @@ class Ingredient extends Component {
             }
         })
         .then(function () {
+            actuallyThis.props.onUpdate();
             actuallyThis.setState({
                 edited: false
             })
-            actuallyThis.props.onUpdate();
         })
         .catch(function (error) {
             console.log(error);
@@ -53,7 +52,6 @@ class Ingredient extends Component {
 
     deleteItem = () => {
         let actuallyThis = this;
-        axios.defaults.port = 8080;
 
         axios({
             method: 'delete',

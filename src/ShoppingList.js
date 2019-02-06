@@ -25,7 +25,6 @@ class ShoppingList extends Component {
 
     getIngredientList = () => {
         let actuallyThis = this;
-        axios.defaults.port = 8080;
 
         axios({
             method: 'get',
@@ -44,7 +43,6 @@ class ShoppingList extends Component {
 
     clearList = () => {
         let actuallyThis = this;
-        axios.defaults.port = 8080;
 
         axios({
             method: 'delete',
