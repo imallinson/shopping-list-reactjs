@@ -16,7 +16,6 @@ class LoginPage extends Component {
         e.preventDefault();
 
         let actuallyThis = this;
-        axios.defaults.port = 8080;
 
         axios({
             method: 'get',
@@ -52,44 +51,50 @@ class LoginPage extends Component {
 
     createUser = (e) => {
         e.preventDefault();
-
+        
         let actuallyThis = this;
         const saltRounds = 10;
-
-        bcrypt.genSalt(saltRounds)
-            .then(function (salt) {
-                bcrypt.hash(actuallyThis.state.password, salt)
-                    .then(function (hash) {
-                        axios({
-                            method: 'post',
-                            url: "http://35.189.92.93:8080/shopping-list/rest/account/create",
-                            responseType: 'json',
-                            data: {
-                                username: actuallyThis.state.username,
-                                password: hash
-                            }
-                        })
-                            .then(function (response) {
-                                if (response.data.message === "account sucessfully created") {
-                                    sessionStorage.setItem("username", actuallyThis.state.username);
-                                    actuallyThis.props.loginHandler();
-                                } else {
-                                    actuallyThis.setState({
-                                        error: response.data.message
-                                    });
+        
+        if (actuallyThis.state.password.length > 7) {
+            bcrypt.genSalt(saltRounds)
+                .then(function (salt) {
+                    bcrypt.hash(actuallyThis.state.password, salt)
+                        .then(function (hash) {
+                            axios({
+                                method: 'post',
+                                url: "http://35.189.92.93:8080/shopping-list/rest/account/create",
+                                responseType: 'json',
+                                data: {
+                                    username: actuallyThis.state.username,
+                                    password: hash
                                 }
                             })
-                            .catch(function (error) {
-                                console.log(error);
-                            });
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                                .then(function (response) {
+                                    if (response.data.message === "account sucessfully created") {
+                                        sessionStorage.setItem("username", actuallyThis.state.username);
+                                        actuallyThis.props.loginHandler();
+                                    } else {
+                                        actuallyThis.setState({
+                                            error: response.data.message
+                                        });
+                                    }
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        } else {
+            actuallyThis.setState({
+                error: "password must be at least 8 characters"
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+        }
     }
 
     handleChange = (e) => {
