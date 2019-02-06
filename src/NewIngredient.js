@@ -42,7 +42,7 @@ class Ingredient extends Component {
 
         axios({
             method: 'post',
-            url: 'http://localhost:8080/shopping-list/rest/ingredient/add',
+            url: "http://35.189.92.93:8080/shopping-list/rest/ingredient/add",
             responseType: 'json',
             data: {
                 username: sessionStorage.getItem("username"),
@@ -52,13 +52,13 @@ class Ingredient extends Component {
             }
         })
             .then(function () {
+                actuallyThis.props.onUpdate();
                 actuallyThis.setState({
                     edited: false,
-                    ingredientName: null,
-                    amount: null,
-                    measurement: null
+                    ingredientName: " ",
+                    amount: " ",
+                    measurement: " "
                 });
-                actuallyThis.props.onUpdate();
             })
             .catch(function (error) {
                 console.log(error);

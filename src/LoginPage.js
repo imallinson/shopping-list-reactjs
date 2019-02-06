@@ -14,11 +14,13 @@ class LoginPage extends Component {
 
     logIn = (e) => {
         e.preventDefault();
+
         let actuallyThis = this;
+        axios.defaults.port = 8080;
 
         axios({
             method: 'get',
-            url: "http://localhost:8080/shopping-list/rest/account/check/" + actuallyThis.state.username,
+            url: "http://35.189.92.93:8080/shopping-list/rest/account/check/" + actuallyThis.state.username,
             responseType: 'json'
         })
             .then(function (response) {
@@ -50,8 +52,8 @@ class LoginPage extends Component {
 
     createUser = (e) => {
         e.preventDefault();
-        let actuallyThis = this;
 
+        let actuallyThis = this;
         const saltRounds = 10;
 
         bcrypt.genSalt(saltRounds)
@@ -60,7 +62,7 @@ class LoginPage extends Component {
                     .then(function (hash) {
                         axios({
                             method: 'post',
-                            url: "http://localhost:8080/shopping-list/rest/account/create",
+                            url: "http://35.189.92.93:8080/shopping-list/rest/account/create",
                             responseType: 'json',
                             data: {
                                 username: actuallyThis.state.username,

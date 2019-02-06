@@ -30,7 +30,7 @@ class Ingredient extends Component {
         
         axios({
             method: 'put',
-            url: "http://localhost:8080/shopping-list/rest/ingredient/update/" + this.props.ingredient.ingredientID,
+            url: "http://35.189.92.93:8080/shopping-list/rest/ingredient/update/" + this.props.ingredient.ingredientID,
             responseType: 'json',
             data: {
                 username: sessionStorage.getItem("username"),
@@ -40,10 +40,10 @@ class Ingredient extends Component {
             }
         })
         .then(function () {
+            actuallyThis.props.onUpdate();
             actuallyThis.setState({
                 edited: false
             })
-            actuallyThis.props.onUpdate();
         })
         .catch(function (error) {
             console.log(error);
@@ -52,9 +52,10 @@ class Ingredient extends Component {
 
     deleteItem = () => {
         let actuallyThis = this;
+
         axios({
             method: 'delete',
-            url: "http://localhost:8080/shopping-list/rest/ingredient/remove/" + this.props.ingredient.ingredientID,
+            url: "http://35.189.92.93:8080/shopping-list/rest/ingredient/remove/" + this.props.ingredient.ingredientID,
             responseType: 'json'
         })
         .then(function () {
