@@ -20,13 +20,10 @@ class Ingredient extends Component {
         })
     }
 
-    saveChange = () => {
-        let actuallyThis = this;
+    saveChange = (e) => {
+        e.preventDefault();
 
-        let amount = actuallyThis.state.amount;
-        if (isNaN(amount) || amount < 0) {
-            amount = 0;
-        }
+        let actuallyThis = this;
         
         axios({
             method: 'put',
@@ -35,7 +32,7 @@ class Ingredient extends Component {
             data: {
                 username: sessionStorage.getItem("username"),
                 ingredientName: actuallyThis.state.ingredientName,
-                amount: amount,
+                amount: actuallyThis.state.amount,
                 measurement: actuallyThis.state.measurement
             }
         })
@@ -50,7 +47,9 @@ class Ingredient extends Component {
         })
     }
 
-    deleteItem = () => {
+    deleteItem = (e) => {
+        e.preventDefault();
+
         let actuallyThis = this;
 
         axios({
@@ -87,8 +86,8 @@ class Ingredient extends Component {
                 </div>
                 <div className="col s1 right">
                     {this.state.edited ?
-                        <button className="btn grey darken-2 list-button" onClick={this.saveChange} >Save</button> :
-                        <button className="btn grey darken-2 list-button" onClick={this.deleteItem} >Delete</button> }
+                        <button className="btn grey darken-2 list-button" type="submit" onClick={this.saveChange} >Save</button> :
+                        <button className="btn grey darken-2 list-button" type="submit" onClick={this.deleteItem} >Delete</button> }
                 </div>
             </div>
         );
