@@ -40,10 +40,10 @@ class Ingredient extends Component {
             }
         })
         .then(function () {
-            actuallyThis.props.onUpdate();
             actuallyThis.setState({
                 edited: false
-            })
+            });
+            actuallyThis.props.onUpdate();
         })
         .catch(function (error) {
             console.log(error);
