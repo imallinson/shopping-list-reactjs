@@ -55,9 +55,9 @@ class Ingredient extends Component {
                 actuallyThis.props.onUpdate();
                 actuallyThis.setState({
                     edited: false,
-                    ingredientName: null,
-                    amount: null,
-                    measurement: null
+                    ingredientName: " ",
+                    amount: " ",
+                    measurement: " "
                 });
             })
             .catch(function (error) {
