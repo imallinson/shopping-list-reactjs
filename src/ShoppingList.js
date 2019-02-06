@@ -25,6 +25,8 @@ class ShoppingList extends Component {
 
     getIngredientList = () => {
         let actuallyThis = this;
+        axios.defaults.port = 8080;
+        
         axios({
             method: 'get',
             url: "/shopping-list/rest/ingredient/get/" + sessionStorage.getItem("username"),
@@ -42,6 +44,8 @@ class ShoppingList extends Component {
 
     clearList = () => {
         let actuallyThis = this;
+        axios.defaults.port = 8080;
+
         axios({
             method: 'delete',
             url: "/shopping-list/rest/account/clear/" + sessionStorage.getItem("username"),

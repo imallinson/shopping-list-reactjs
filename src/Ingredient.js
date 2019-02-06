@@ -22,6 +22,7 @@ class Ingredient extends Component {
 
     saveChange = () => {
         let actuallyThis = this;
+        axios.defaults.port = 8080;
 
         let amount = actuallyThis.state.amount;
         if (isNaN(amount) || amount < 0) {
@@ -52,6 +53,8 @@ class Ingredient extends Component {
 
     deleteItem = () => {
         let actuallyThis = this;
+        axios.defaults.port = 8080;
+
         axios({
             method: 'delete',
             url: "/shopping-list/rest/ingredient/remove/" + this.props.ingredient.ingredientID,

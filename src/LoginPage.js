@@ -14,7 +14,9 @@ class LoginPage extends Component {
 
     logIn = (e) => {
         e.preventDefault();
+
         let actuallyThis = this;
+        axios.defaults.port = 8080;
 
         axios({
             method: 'get',
@@ -50,9 +52,10 @@ class LoginPage extends Component {
 
     createUser = (e) => {
         e.preventDefault();
-        let actuallyThis = this;
 
+        let actuallyThis = this;
         const saltRounds = 10;
+        axios.defaults.port = 8080;
 
         bcrypt.genSalt(saltRounds)
             .then(function (salt) {

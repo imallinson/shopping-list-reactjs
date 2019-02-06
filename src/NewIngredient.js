@@ -39,6 +39,7 @@ class Ingredient extends Component {
         }
 
         let actuallyThis = this;
+        axios.defaults.port = 8080;
 
         axios({
             method: 'post',
