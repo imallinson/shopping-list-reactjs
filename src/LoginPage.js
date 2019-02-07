@@ -16,7 +16,7 @@ class LoginPage extends Component {
 
         axios({
             method: 'get',
-            url: "/account/check/" + actuallyThis.state.username,
+            url: "/rest/account/check/" + actuallyThis.state.username,
             responseType: 'json'
         })
             .then(function (response) {
@@ -57,7 +57,7 @@ class LoginPage extends Component {
                     .then(function (hash) {
                         axios({
                             method: 'post',
-                            url: "/account/create",
+                            url: "/rest/account/create",
                             responseType: 'json',
                             data: {
                                 username: actuallyThis.state.username,

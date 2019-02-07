@@ -28,7 +28,7 @@ class ShoppingList extends Component {
 
         axios({
             method: 'get',
-            url: "/ingredient/get/" + sessionStorage.getItem("username"),
+            url: "/rest/ingredient/get/" + sessionStorage.getItem("username"),
             responseType: 'json'
         })
             .then(function (response) {
@@ -46,7 +46,7 @@ class ShoppingList extends Component {
 
         axios({
             method: 'delete',
-            url: "/account/clear/" + sessionStorage.getItem("username"),
+            url: "/rest/account/clear/" + sessionStorage.getItem("username"),
             responseType: 'json'
         })
             .then(function (response) {

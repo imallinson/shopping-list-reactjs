@@ -26,7 +26,7 @@ class Ingredient extends Component {
 
         axios({
             method: 'post',
-            url: "/ingredient/add",
+            url: "/rest/ingredient/add",
             responseType: 'json',
             data: {
                 username: sessionStorage.getItem("username"),
