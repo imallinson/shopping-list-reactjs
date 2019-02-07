@@ -20,42 +20,41 @@ class Ingredient extends Component {
         })
     }
 
-    saveChange = () => {
-        let actuallyThis = this;
+    saveChange = (e) => {
+        e.preventDefault();
 
-        let amount = actuallyThis.state.amount;
-        if (isNaN(amount) || amount < 0) {
-            amount = 0;
-        }
+        let actuallyThis = this;
         
         axios({
             method: 'put',
-            url: "http://35.189.92.93:8080/shopping-list/rest/ingredient/update/" + this.props.ingredient.ingredientID,
+            url: "/ingredient/update/" + this.props.ingredient.ingredientID,
             responseType: 'json',
             data: {
                 username: sessionStorage.getItem("username"),
                 ingredientName: actuallyThis.state.ingredientName,
-                amount: amount,
+                amount: actuallyThis.state.amount,
                 measurement: actuallyThis.state.measurement
             }
         })
         .then(function () {
-            actuallyThis.props.onUpdate();
             actuallyThis.setState({
                 edited: false
-            })
+            });
+            actuallyThis.props.onUpdate();
         })
         .catch(function (error) {
             console.log(error);
         })
     }
 
-    deleteItem = () => {
+    deleteItem = (e) => {
+        e.preventDefault();
+
         let actuallyThis = this;
 
         axios({
             method: 'delete',
-            url: "http://35.189.92.93:8080/shopping-list/rest/ingredient/remove/" + this.props.ingredient.ingredientID,
+            url: "/ingredient/remove/" + this.props.ingredient.ingredientID,
             responseType: 'json'
         })
         .then(function () {
@@ -77,18 +76,18 @@ class Ingredient extends Component {
         return (
             <div className="row">
                 <div className="input-field col s7">
-                    <input value={this.state.ingredientName} type="text" name="ingredientName" onChange={this.handleChange} ></input>
+                    <input value={this.state.ingredientName} type="text" className="validate" required name="ingredientName" onChange={this.handleChange} ></input>
                 </div>
                 <div className="input-field col s2">
-                    <input value={this.state.amount} type="text" name="amount" onChange={this.handleChange} ></input>
+                    <input value={this.state.amount} type="text" className="validate" required pattern="[0-9]+" name="amount" onChange={this.handleChange} ></input>
                 </div>
                 <div className="input-field col s2">
-                    <input value={this.state.measurement} type="text" name="measurement" onChange={this.handleChange} ></input>
+                    <input value={this.state.measurement} type="text" className="validate" name="measurement" onChange={this.handleChange} ></input>
                 </div>
                 <div className="col s1 right">
                     {this.state.edited ?
-                        <button className="btn grey darken-2 list-button" onClick={this.saveChange} >Save</button> :
-                        <button className="btn grey darken-2 list-button" onClick={this.deleteItem} >Delete</button> }
+                        <button className="btn grey darken-2 list-button" type="submit" onClick={this.saveChange} >Save</button> :
+                        <button className="btn grey darken-2 list-button" type="submit" onClick={this.deleteItem} >Delete</button> }
                 </div>
             </div>
         );

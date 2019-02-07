@@ -19,30 +19,14 @@ class Ingredient extends Component {
         })
     }
 
-    addIngredient = () => {
-        if (this.state.ingredientName === null) {
-            this.setState({
-                ingredientName: " "
-            })
-        }
-
-        if (this.state.amount === null || this.state.amount < 0 || isNaN(this.state.amount)) {
-            this.setState({
-                amount: 0
-            })
-        }
-
-        if (this.state.measurement === null) {
-            this.setState({
-                measurement: " "
-            })
-        }
+    addIngredient = (e) => {
+        e.preventDefault();
 
         let actuallyThis = this;
 
         axios({
             method: 'post',
-            url: "http://35.189.92.93:8080/shopping-list/rest/ingredient/add",
+            url: "/ingredient/add",
             responseType: 'json',
             data: {
                 username: sessionStorage.getItem("username"),
@@ -52,13 +36,13 @@ class Ingredient extends Component {
             }
         })
             .then(function () {
-                actuallyThis.props.onUpdate();
                 actuallyThis.setState({
                     edited: false,
-                    ingredientName: " ",
-                    amount: " ",
-                    measurement: " "
+                    ingredientName: null,
+                    amount: null,
+                    measurement: null
                 });
+                actuallyThis.props.onUpdate();
             })
             .catch(function (error) {
                 console.log(error);
@@ -69,17 +53,17 @@ class Ingredient extends Component {
         return (
             <div className="row">
                 <div className="input-field col s7">
-                    <input placeholder="ingredient" type="text" name="ingredientName" value={this.state.ingredientName} onChange={this.handleChange} ></input>
+                    <input placeholder="ingredient" type="text" className="validate" name="ingredientName" required value={this.state.ingredientName} onChange={this.handleChange} ></input>
                 </div>
                 <div className="input-field col s2">
-                    <input placeholder="amount" type="text" name="amount" value={this.state.amount} onChange={this.handleChange} ></input>
+                    <input placeholder="amount" type="text" className="validate" name="amount" required pattern="[0-9]+" value={this.state.amount} onChange={this.handleChange} ></input>
                 </div>
                 <div className="input-field col s2">
-                    <input placeholder="measurement" type="text" name="measurement" value={this.state.measurement} onChange={this.handleChange} ></input>
+                    <input placeholder="measurement" type="text" className="validate" name="measurement" value={this.state.measurement} onChange={this.handleChange} ></input>
                 </div>
                 <div className="col s1 right">
                     {this.state.edited ?
-                        <button className="btn grey darken-2 list-button" onClick={this.addIngredient} >Save</button> :
+                        <button className="btn grey darken-2 list-button" type="submit" onClick={this.addIngredient} >Save</button> :
                         null}
                 </div>
             </div>
