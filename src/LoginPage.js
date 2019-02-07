@@ -101,7 +101,7 @@ class LoginPage extends Component {
                     <div className="col s4">
                         <label htmlFor="username">Username</label>
                         <input type="text" className="validate" name="username" required pattern="[A-Za-z0-9-]+" onChange={this.handleChange}></input>
-                        <label className="helper-text" data-error="username can only contain letters or numbers"></label>
+                        <label htmlFor="username" className="helper-text" data-error="username can only contain letters or numbers"></label>
                     </div>
                     <div className="col s4"></div>
                 </div>
@@ -110,17 +110,17 @@ class LoginPage extends Component {
                     <div className="col s4">
                         <label htmlFor="password">Password</label>
                         <input type="password" className="validate" name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" onChange={this.handleChange}></input>
-                        <label className="helper-text" data-error="password must be between 8 and 16 characters and contain a lower and upper case letter and a number"></label>
+                        <label htmlFor="password" className="helper-text" data-error="password must be between 8 and 16 characters and contain a lower and upper case letter and a number"></label>
                     </div>
                     <div className="col s4"></div>
                 </div>
                 <div className="row">
                     <div className="col s4"></div>
                     <div className="col center">
-                        <button className="btn grey darken-2" id="login" type="submit" onClick={this.logIn}>Log In</button>
+                        <button className="btn grey darken-2" id="login" type="button" onClick={this.logIn}>Log In</button>
                     </div>
                     <div className="col center">
-                        <button className="btn grey darken-2" id="create" type="submit" onClick={this.createUser}>Create Account</button>
+                        <button className="btn grey darken-2" id="create" type="button" onClick={this.createUser}>Create Account</button>
                     </div>
                     <div className="col s4"></div>
                 </div>
