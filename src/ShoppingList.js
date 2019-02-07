@@ -28,7 +28,7 @@ class ShoppingList extends Component {
 
         axios({
             method: 'get',
-            url: "http://35.189.92.93:8080/shopping-list/rest/ingredient/get/" + sessionStorage.getItem("username"),
+            url: "/ingredient/get/" + sessionStorage.getItem("username"),
             responseType: 'json'
         })
             .then(function (response) {
@@ -46,7 +46,7 @@ class ShoppingList extends Component {
 
         axios({
             method: 'delete',
-            url: "http://35.189.92.93:8080/shopping-list/rest/account/clear/" + sessionStorage.getItem("username"),
+            url: "/account/clear/" + sessionStorage.getItem("username"),
             responseType: 'json'
         })
             .then(function (response) {

@@ -21,12 +21,12 @@ class Ingredient extends Component {
 
     addIngredient = (e) => {
         e.preventDefault();
-        
+
         let actuallyThis = this;
 
         axios({
             method: 'post',
-            url: "http://35.189.92.93:8080/shopping-list/rest/ingredient/add",
+            url: "/ingredient/add",
             responseType: 'json',
             data: {
                 username: sessionStorage.getItem("username"),
