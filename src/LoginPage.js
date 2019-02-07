@@ -12,8 +12,6 @@ class LoginPage extends Component {
     }
 
     logIn = (e) => {
-        e.preventDefault();
-
         let actuallyThis = this;
 
         axios({
@@ -49,8 +47,6 @@ class LoginPage extends Component {
     }
 
     createUser = (e) => {
-        e.preventDefault();
-
         let actuallyThis = this;
         const saltRounds = 10;
 
