@@ -7,7 +7,8 @@ class LoginPage extends Component {
         super();
         this.state = {
             username: null,
-            password: null
+            password: null,
+            error: null
         }
     }
 
@@ -108,6 +109,7 @@ class LoginPage extends Component {
                     <div className="col s4">
                         <label htmlFor="password">Password</label>
                         <input type="password" className="validate" name="password" required onChange={this.handleChange}></input>
+                        <span className="helper-text">{this.state.error}</span>
                     </div>
                     <div className="col s4"></div>
                 </div>
