@@ -6,9 +6,9 @@ class Ingredient extends Component {
         super();
         this.state = {
             edited: false,
-            ingredientName: null,
-            amount: null,
-            measurement: null
+            ingredientName: "",
+            amount: "",
+            measurement: ""
         }
     }
 
@@ -38,9 +38,9 @@ class Ingredient extends Component {
             .then(function () {
                 actuallyThis.setState({
                     edited: false,
-                    ingredientName: null,
-                    amount: null,
-                    measurement: null
+                    ingredientName: "",
+                    amount: "",
+                    measurement: ""
                 });
                 actuallyThis.props.onUpdate();
             })
