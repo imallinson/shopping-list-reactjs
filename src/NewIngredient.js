@@ -63,7 +63,7 @@ class Ingredient extends Component {
                 </div>
                 <div className="col s1 right">
                     {this.state.edited ?
-                        <button className="btn grey darken-2 list-button" type="button" onClick={this.addIngredient} >Save</button> :
+                        <button className="btn grey darken-2 list-button" type="submit" onClick={this.addIngredient} >Save</button> :
                         null}
                 </div>
             </div>
