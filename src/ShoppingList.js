@@ -24,10 +24,6 @@ class ShoppingList extends Component {
     }
 
     getIngredientList = () => {
-        this.setState({
-            shoppingList: []
-        })
-
         let actuallyThis = this;
 
         axios({
