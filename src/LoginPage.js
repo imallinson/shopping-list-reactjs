@@ -51,7 +51,7 @@ class LoginPage extends Component {
         let actuallyThis = this;
         const saltRounds = 10;
 
-        if (actuallyThis.state.username.length < 1 || actuallyThis.state.password.length < 1) {
+        if (actuallyThis.state.username === null || actuallyThis.state.password === null ) {
             actuallyThis.setState({
                 error: "username and password must be entered"
             })
@@ -112,7 +112,7 @@ class LoginPage extends Component {
                     <div className="col s4 offset-s4">
                         <label htmlFor="password">Password</label>
                         <input type="password" className="validate" name="password" onChange={this.handleChange}></input>
-                        <span className="helper-text">{this.state.error}</span>
+                        <label className="helper-text">{this.state.error}</label>
                     </div>
                 </div>
                 <div className="row">
