@@ -51,40 +51,46 @@ class LoginPage extends Component {
         let actuallyThis = this;
         const saltRounds = 10;
 
-        bcrypt.genSalt(saltRounds)
-            .then(function (salt) {
-                bcrypt.hash(actuallyThis.state.password, salt)
-                    .then(function (hash) {
-                        axios({
-                            method: 'post',
-                            url: "/rest/account/create",
-                            responseType: 'json',
-                            data: {
-                                username: actuallyThis.state.username,
-                                password: hash
-                            }
-                        })
-                            .then(function (response) {
-                                if (response.data.message === "account sucessfully created") {
-                                    sessionStorage.setItem("username", actuallyThis.state.username);
-                                    actuallyThis.props.loginHandler();
-                                } else {
-                                    actuallyThis.setState({
-                                        error: response.data.message
-                                    });
+        if (actuallyThis.state.username.length < 1 || actuallyThis.state.password.length < 1) {
+            actuallyThis.setState({
+                error: "username and password must be entered"
+            })
+        } else {
+            bcrypt.genSalt(saltRounds)
+                .then(function (salt) {
+                    bcrypt.hash(actuallyThis.state.password, salt)
+                        .then(function (hash) {
+                            axios({
+                                method: 'post',
+                                url: "/rest/account/create",
+                                responseType: 'json',
+                                data: {
+                                    username: actuallyThis.state.username,
+                                    password: hash
                                 }
                             })
-                            .catch(function (error) {
-                                console.log(error);
-                            });
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                                .then(function (response) {
+                                    if (response.data.message === "account sucessfully created") {
+                                        sessionStorage.setItem("username", actuallyThis.state.username);
+                                        actuallyThis.props.loginHandler();
+                                    } else {
+                                        actuallyThis.setState({
+                                            error: response.data.message
+                                        });
+                                    }
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
 
     handleChange = (e) => {
@@ -97,31 +103,27 @@ class LoginPage extends Component {
         return (
             <div className="container" id="loginPage" >
                 <div className="row">
-                    <div className="col s4"></div>
-                    <div className="col s4">
+                    <div className="col s4 offset-s4 center">
                         <label htmlFor="username">Username</label>
-                        <input type="text" className="validate" name="username" required onChange={this.handleChange}></input>
+                        <input type="text" className="validate" name="username" onChange={this.handleChange}></input>
                     </div>
-                    <div className="col s4"></div>
                 </div>
                 <div className="row">
-                    <div className="col s4"></div>
-                    <div className="col s4">
+                    <div className="col s4 offset-s4 center">
                         <label htmlFor="password">Password</label>
-                        <input type="password" className="validate" name="password" required onChange={this.handleChange}></input>
+                        <input type="password" className="validate" name="password" onChange={this.handleChange}></input>
                         <span className="helper-text">{this.state.error}</span>
                     </div>
-                    <div className="col s4"></div>
                 </div>
                 <div className="row">
-                    <div className="col s4"></div>
-                    <div className="col center">
-                        <button className="btn grey darken-2" id="login" type="submit" onClick={this.logIn}>Log In</button>
+                    <div className="col s4 offset-s4 center">
+                        <button className="btn grey darken-2" id="login" type="button" onClick={this.logIn}>Log In</button>
                     </div>
-                    <div className="col center">
-                        <button className="btn grey darken-2" id="create" type="submit" onClick={this.createUser}>Create Account</button>
+                </div>
+                <div className="row">
+                    <div className="col s4 offset-s4 center">
+                        <button className="btn grey darken-2" id="create" type="button" onClick={this.createUser}>Create Account</button>
                     </div>
-                    <div className="col s4"></div>
                 </div>
             </div>
         );
