@@ -20,6 +20,9 @@ class ShoppingList extends Component {
     }
 
     handleUpdate = () => {
+	this.setState({
+	    shoppingList: []
+	});	
         this.getIngredientList();
     }
 
