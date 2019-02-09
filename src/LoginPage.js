@@ -8,7 +8,7 @@ class LoginPage extends Component {
         this.state = {
             username: null,
             password: null,
-            error: null
+            error: ""
         }
     }
 
@@ -103,13 +103,13 @@ class LoginPage extends Component {
         return (
             <div className="container" id="loginPage" >
                 <div className="row">
-                    <div className="col s4 offset-s4 center">
+                    <div className="col s4 offset-s4">
                         <label htmlFor="username">Username</label>
                         <input type="text" className="validate" name="username" onChange={this.handleChange}></input>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col s4 offset-s4 center">
+                    <div className="col s4 offset-s4">
                         <label htmlFor="password">Password</label>
                         <input type="password" className="validate" name="password" onChange={this.handleChange}></input>
                         <span className="helper-text">{this.state.error}</span>
