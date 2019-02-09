@@ -65,7 +65,7 @@ class ShoppingList extends Component {
     }
 
     render() {
-        const listComponents = this.state.shoppingList.map((i) =>
+        let listComponents = this.state.shoppingList.map((i) =>
             (<div className="row" id={i.ingredientID} >
                 <Ingredient ingredient={i} onUpdate={this.handleUpdate} />
             </div>));
